@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="styles.css">  
+</head>
+<body>
+
+<div class="container">
+    <h2>Welcome <span th:text="${param.name}"></span>.</h2>
+
+    <h3>Your Order details are as follows:</h3>
+
+    <ul>
+        <li>Email Address: <span th:text="${param.email}"></span></li>
+        <li>Phone Number: <span th:text="${param.phone}"></span></li>
+        <li>Address:
+            <ul>
+                <li>Street Address: <span th:text="${param.street}"></span></li>
+                <li>City: <span th:text="${param.city}"></span></li>
+                <li>State: <span th:text="${param.state}"></span></li>
+                <li>Postal Code: <span th:text="${param.postalCode}"></span></li>
+                <li>Country: <span th:text="${param.country}"></span></li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Phone Details:</h3>
+
+    <ul>
+        <li>Phone Brand: <span th:text="${param.phoneModel}"></span></li>
+        <li>Phone Model: <span th:text="${param.phoneModel}"></span></li>
+        <li>Phone Price: CAD <span th:text="${param.phonePrice}"></span></li>
+        <li>Quantity: <span th:text="${param.quantity}"></span></li>
+    </ul>
+
+    <p>Total: CAD <span th:text="${param.phonePrice * param.quantity}"></span></p>
+</div>
+
+</body>
+</html>

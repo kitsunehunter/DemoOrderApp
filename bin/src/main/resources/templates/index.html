@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="form.css">  
+    <title>Online Smart Phone Order Request</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error-message {
+            color: #ff0000;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+        .billing-address {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 15px;
+        }
+    </style>
+   </head>
+<body>
+
+<div class="container">
+    <h2>Online Smart Phone Order Request</h2>
+    <form th:action="@{/submitOrder}" method="post">
+        <!-- Personal Information -->
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required/>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required/>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="10 digits" required/>
+
+<!-- Existing Phone Model Select -->
+<label for="phoneModel">Phone Model:</label>
+<select id="phoneModel" name="phoneModel" required onchange="handlePhoneModelChange()">
+    <option value="">Select a model</option>
+    <option value="iPhone">iPhone</option>
+    <option value="Samsung">Samsung</option>
+</select>
+
+<!-- New iPhone Price Select -->
+<label for="iphonePrice">iPhone Price:</label>
+<select id="iphonePrice" name="iphonePrice" required disabled>
+    <option value="">Select a price</option>
+    <option value="699">iPhone 12 - $699</option>
+    <option value="799">iPhone 13 - $799</option>
+    <!-- Add more iPhone models and prices as needed -->
+</select>
+
+<!-- New Samsung Price Select -->
+<label for="samsungPrice">Samsung Price:</label>
+<select id="samsungPrice" name="samsungPrice" required disabled>
+    <option value="">Select a price</option>
+    <option value="699">Samsung Galaxy S21 - $699</option>
+    <option value="799">Samsung Galaxy S22 - $799</option>
+    <!-- Add more Samsung models and prices as needed -->
+</select>
+
+<script>
+    function handlePhoneModelChange() {
+        var phoneModelSelect = document.getElementById("phoneModel");
+        var iphonePriceSelect = document.getElementById("iphonePrice");
+        var samsungPriceSelect = document.getElementById("samsungPrice");
+
+        if (phoneModelSelect.value === "iPhone") {
+            // If iPhone is selected, disable Samsung options and enable iPhone options
+            samsungPriceSelect.disabled = true;
+            iphonePriceSelect.disabled = false;
+            samsungPriceSelect.selectedIndex = 0; // Reset selected option
+        } else if (phoneModelSelect.value === "Samsung") {
+            // If Samsung is selected, disable iPhone options and enable Samsung options
+            iphonePriceSelect.disabled = true;
+            samsungPriceSelect.disabled = false;
+            iphonePriceSelect.selectedIndex = 0; // Reset selected option
+        } else {
+            // If any other model is selected, disable both iPhone and Samsung options
+            iphonePriceSelect.disabled = true;
+            samsungPriceSelect.disabled = true;
+            iphonePriceSelect.selectedIndex = 0; // Reset selected option
+            samsungPriceSelect.selectedIndex = 0; // Reset selected option
+        }
+    }
+</script>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" min="1" required/>
+
+        <!-- Billing Address -->
+        <div class="billing-address">
+            <h3>Billing Address</h3>
+            <label for="street">Street Address:</label>
+            <input type="text" id="street" name="street" required/>
+
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required/>
+
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" required/>
+
+            <label for="postalCode">Postal Code:</label>
+            <input type="text" id="postalCode" name="postalCode" required/>
+
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" required/>
+        </div>
+
+        <!-- Submit and Reset Buttons -->
+        <button type="submit">Submit Order</button>
+        <button type="reset" style="background-color: #f44336; margin-left: 10px;">Reset</button>
+    </form>
+        <p>
+        <a th:href="@{/about}">About Us</a>
+    </p>
+</div>
+</body>
+</html>
