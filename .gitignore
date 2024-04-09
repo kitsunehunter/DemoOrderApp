@@ -18,5 +18,5 @@
 # Compiled bytecode
 *.class
 
-# Maven build directory
+# Maven build directory __
 target/
