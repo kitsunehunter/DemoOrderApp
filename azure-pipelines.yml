@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  name: Default
+  name: Test4_new
   demands: maven
 
 variables:
